@@ -33,17 +33,12 @@ export async function handlerUsersGet(req: Request, res: Response, user: User) {
   respondWithJSON(res, 200, user);
 }
 
-function generateRandomSHA256Hash(): string {
+function generateRandomSHA256Hash(encoding: string = "hex"): string {
+  if (!["base64", "base64url", "hex", "binary"].includes(encoding)) {
+    throw new Error("Invalid encoding");
+  }
   return crypto
     .createHash("sha256")
     .update(crypto.randomBytes(32))
-    .digest("hex");
-}
-
-// notely-dev-1: is this still used?
-export function isValidEmail(email: string): boolean {
-  const emailExpression =
-    /^([a-zA-Z0-9_])+(([a-zA-Z0-9])+)+([a-zA-Z0-9]{2,4})+$/;
-
-  return emailExpression.test(email);
+    .digest(eval("encoding"));
 }
