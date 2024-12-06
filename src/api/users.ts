@@ -33,12 +33,10 @@ export async function handlerUsersGet(req: Request, res: Response, user: User) {
   respondWithJSON(res, 200, user);
 }
 
-function generateRandomSHA256Hash(encoding: string = "hex"): string {
-  if (!["base64", "base64url", "hex", "binary"].includes(encoding)) {
-    throw new Error("Invalid encoding");
-  }
+function generateRandomSHA256Hash(): string {
+  // should we be using crypto.randomBytes instead of crypto.pseudoRandomBytes?
   return crypto
     .createHash("sha256")
-    .update(crypto.randomBytes(32))
-    .digest(eval("encoding"));
+    .update(crypto.pseudoRandomBytes(32))
+    .digest("hex");
 }
