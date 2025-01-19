@@ -42,5 +42,5 @@ jobs:
       - name: Check the formatting
         run: npm run format:check
 
-      - name: Lint the code
-        run: npm run lint
+      - name: Check linting
+        run: npm run lint -- --max-warnings=0
