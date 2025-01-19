@@ -13,7 +13,9 @@
     "start": "node dist/main.js",
     "dev": "npx tsc && node dist/main.js",
     "test": "vitest --run",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "docker:build": "docker build -t lpudsw9udbxri9wtur2c/notely:latest .",
+    "docker:run": "docker run -e PORT=8080 -p 8080:8080 lpudsw9udbxri9wtur2c/notely:latest"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
